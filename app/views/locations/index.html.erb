@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="http://icon-icons.com/icons2/1131/PNG/512/worldgrid_80392.png" style="width:60px;height:35px;">
+      </a>
+    </div>
+  </div>
+</nav>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Mapa Mundial</a></li>
+</ol>
+
+<div class="page-header">
+<h1>Mapa Mundial</h1>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Latitud</th>
+      <th>Longitud</th>
+      <th>Dirección</th>
+      <th>Descripción</th>
+      <th>Titulo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.latitude %></td>
+        <td><%= location.longitude %></td>
+        <td><%= location.address %></td>
+        <td><%= location.description %></td>
+        <td><%= location.title %></td>
+        <td><%= link_to 'Show', location %></td>
+        <td><%= link_to 'Edit', edit_location_path(location) %></td>
+        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Location', new_location_path %>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<script type="text/javascript">
+  buildMap(<%=raw @hash.to_json %>);
+</script>
+
+<table>
+  <thead>
+    <th><div style="text-align:center;width:400px;padding:1em 0;"> <h2><a style="text-decoration:none;" href="http://www.zeitverschiebung.net/es/city/3530597"><span style="color:gray;">Hora actual en</span><br />Guanajuato, México</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&timezone=America%2FMexico_City" width="100%" height="150" frameborder="0" seamless></iframe> </div>
+</th>
+<th><div style="text-align:center;width:400px;padding:1em 0;"> <h2><a style="text-decoration:none;" href="http://www.zeitverschiebung.net/es/city/2643743"><span style="color:gray;">Hora actual en</span><br />London, Reino Unido</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&timezone=Europe%2FLondon" width="100%" height="150" frameborder="0" seamless></iframe> </div>
+</th>
+<th><div style="text-align:center;width:400px;padding:1em 0;"> <h2><a style="text-decoration:none;" href="http://www.zeitverschiebung.net/es/city/1819729"><span style="color:gray;">Hora actual en</span><br />Hong Kong, Hong Kong</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&timezone=Asia%2FHong_Kong" width="100%" height="150" frameborder="0" seamless></iframe></div>
+</th>
+  </thead>
+</table>
